@@ -51,10 +51,9 @@ int main(void)
                 
                 // open vscode to the file
                 strcat(folder_path, ".c");
-                int cmd = _execlp("code",
-                    "code", 
-                    folder_path,
-                    NULL);
+                char cmd[] = "code ";
+                strcat(cmd, folder_path);
+                system(cmd);
             }
             else
             {
