@@ -90,6 +90,7 @@ int create_C(char name[])
     if (file_check = fopen(file_name, "r"))
     {
         fclose(fp);
+        fclose(file_check);
         return 1;
     }
     return 0;
