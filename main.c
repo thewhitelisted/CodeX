@@ -47,13 +47,12 @@ int main(void)
                 printf("\npress any key to continue");
                 getch();
                 system("cls");
-                
+
                 // open vscode to the file
                 strcat(folder_path, ".c");
                 char cmd[] = "code ";
                 strcat(cmd, folder_path);
                 system(cmd);
-
             }
             else
             {
