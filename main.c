@@ -54,6 +54,7 @@ int main(void)
                 char cmd[] = "code ";
                 strcat(cmd, folder_path);
                 system(cmd);
+
             }
             else
             {
