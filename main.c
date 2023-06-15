@@ -169,7 +169,7 @@ int create_C(char name[])
     fp = fopen(file_name, "w");
 
     // write
-    fputs("#include <stdio.h>\n\nint main()\n{\n\t\n\treturn 0;\n}", fp);
+    fputs("#include <stdio.h>\n\nint main()\n{\n    \n    return 0;\n}", fp);
 
     // check if the file has been created
     FILE *file_check;
@@ -193,7 +193,7 @@ int create_Python(char name[])
     fp = fopen(file_name, "w");
 
     // write
-    fputs("def main(): -> None\n\tpass\n\nif __name__ == '__main__':\n\tmain()", fp);
+    fputs("def main(): -> None\n    pass\n\nif __name__ == '__main__':\n    main()", fp);
 
     // check if the file has been created
     FILE *file_check;
@@ -219,7 +219,7 @@ int create_Java(char name[], char file[])
     // write
     char template[255] = "public class ";
     strcat(template, file);
-    strcat(template, "{\n\tpublic static void main(String[] args){\n\t\tSystem.out.println(\"Hello world\");\n\t}\n}");
+    strcat(template, "{\n    public static void main(String[] args){\n        System.out.println(\"Hello world\");\n    }\n}");
     fputs(template, fp);
 
     // check if the file has been created
