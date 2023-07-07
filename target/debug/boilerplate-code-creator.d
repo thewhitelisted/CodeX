@@ -1,0 +1,1 @@
+C:\Users\clee\Desktop\code\boilerplate-code-creator-rust\boilerplate-code-creator\target\debug\boilerplate-code-creator.exe: C:\Users\clee\Desktop\code\boilerplate-code-creator-rust\boilerplate-code-creator\src\main.rs
