@@ -1,25 +1,23 @@
 use std::fs::File;
-use std::io::{self, Read};
+use std::io::prelude::*;
 
-fn read_file_contents(file_path: &str) -> io::Result<String> {
-    // Open the file
-    let mut file = File::open(file_path)?;
+fn create_and_write_file(file_path: &str, content: &str) -> std::io::Result<()> {
+    // Create a new file at the specified path
+    let mut file = File::create(file_path)?;
 
-    // Read the contents into a string
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
+    // Write the content to the file
+    file.write_all(content.as_bytes())?;
 
-    Ok(contents)
+    Ok(())
 }
 
 fn main() {
     let file_path = "test.txt";
-    match read_file_contents(file_path) {
-        Ok(contents) => {
-            println!("File contents:\n{}", contents);
-        }
-        Err(error) => {
-            eprintln!("Error reading file: {}", error);
-        }
+    let content = "Hello, World!";
+
+    if let Err(err) = create_and_write_file(file_path, content) {
+        eprintln!("Error: {}", err);
+    } else {
+        println!("File created and written successfully.");
     }
 }
