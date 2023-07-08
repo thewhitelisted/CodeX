@@ -10,7 +10,7 @@ fn get_string() -> String {
 }
 
 fn pause() {
-    println!("Press ENTER to continue...");
+    println!("\nPress ENTER to continue...");
     let _ = get_string();
 }
 
