@@ -10,16 +10,27 @@ fn get_string() -> String {
 }
 
 #[allow(dead_code)]
-fn create_and_write_file(file_path: &str, content: &str) -> std::io::Result<()> {
-    let mut file = File::create(file_path)?;
+fn create_and_write_file(file_path: String, content: String) -> std::io::Result<()> {
+    let mut file = File::create(file_path.to_string())?;
 
-    file.write_all(content.as_bytes())?;
+    file.write_all(content.to_string().as_bytes())?;
 
     Ok(())
 }
 
+fn remove_slash(input: &mut String) {
+    if input.ends_with('/') {
+        input.pop();
+    }
+}
+
 fn create_c() {
-    todo!();
+    clearscreen::clear().expect("failed to clear screen");
+    println!("C FILE CREATOR");
+
+    println!("\nENTER THE FOLDER PATH: ");
+    let mut path = get_string();
+    remove_slash(&mut path);
 }
 
 fn create_python() {
