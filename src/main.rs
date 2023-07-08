@@ -9,6 +9,18 @@ fn get_string() -> String {
     value.trim().to_string()
 }
 
+fn pause() {
+    let mut stdin = std::io::stdin();
+    let mut stdout = std::io::stdout();
+
+    // We want the cursor to stay at the end of the line, so we print without a newline and flush manually.
+    write!(stdout, "\nPress the ENTER key to continue...").unwrap();
+    stdout.flush().unwrap();
+
+    // Read a single byte and discard
+    let _ = stdin.read(&mut [0u8]).unwrap();
+}
+
 #[allow(dead_code)]
 fn create_and_write_file(file_path: String, content: String) -> std::io::Result<()> {
     let mut file = File::create(file_path.to_string())?;
@@ -31,6 +43,21 @@ fn create_c() {
     println!("\nENTER THE FOLDER PATH: ");
     let mut path = get_string();
     remove_slash(&mut path);
+
+    println!("\nENTER THE FILE NAME WITHOUT FILE EXTENSION: ");
+    let file_name = get_string();
+
+    let full_path = path + "/" + &file_name + ".c";
+    if let Err(err) = create_and_write_file(
+        full_path,
+        "#include <stdio.h>\n\nint main()\n{\n\t\n\treturn 0;\n}".to_string(),
+    ) {
+        eprint!("\nError: {}", err);
+        pause();
+    } else {
+        print!("\nFile created and written successfully.");
+        pause();
+    }
 }
 
 fn create_python() {
