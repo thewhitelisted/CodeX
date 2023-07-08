@@ -1,11 +1,12 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-fn get_string(destination: &mut &str) -> () {
+fn get_string() -> String {
+    let mut value = String::new();
     std::io::stdin()
-        .read_line(&mut destination.to_string())
+        .read_line(&mut value)
         .expect("failed to read from std::io::stdin");
-    *destination = destination.trim();
+    value.trim().to_string()
 }
 
 #[allow(dead_code)]
@@ -40,15 +41,15 @@ fn main() {
 
     loop {
         clearscreen::clear().expect("failed to clear screen");
-        let mut option: &str = &String::new();
         println!("Code File Creator\n");
         println!("Commands: c, python, java\n");
-        get_string(&mut option);
+        let option = String::from(get_string());
 
-        match option {
+        match &option[..] {
             "c" => create_c(),
             "python" => create_python(),
             "java" => create_java(),
+            "quit()" => std::process::exit(0),
             _ => clearscreen::clear().expect("failed to clear screen"),
         }
     }
