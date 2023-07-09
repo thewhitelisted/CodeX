@@ -29,18 +29,28 @@ fn remove_slash(input: &mut String) {
     }
 }
 
+fn get_path() -> String {
+    println!("\nENTER THE FOLDER PATH: ");
+    let mut path = get_string();
+    remove_slash(&mut path);
+    path
+}
+
+fn get_full_filepath(path: String, file_ext: &str) -> String {
+    println!("\nENTER THE FILE NAME WITHOUT FILE EXTENSION: ");
+    let file_name = get_string();
+    let full_path = path + "/" + &file_name + file_ext;
+    full_path
+}
+
 fn create_c() {
     clearscreen::clear().expect("failed to clear screen");
     println!("C FILE CREATOR");
 
-    println!("\nENTER THE FOLDER PATH: ");
-    let mut path = get_string();
-    remove_slash(&mut path);
+    let path = get_path();
 
-    println!("\nENTER THE FILE NAME WITHOUT FILE EXTENSION: ");
-    let file_name = get_string();
+    let full_path = get_full_filepath(path, ".c");
 
-    let full_path = path + "/" + &file_name + ".c";
     if let Err(err) = create_and_write_file(
         full_path,
         "#include <stdio.h>\n\nint main()\n{\n\t\n\treturn 0;\n}".to_string(),
