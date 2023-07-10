@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::prelude::*;
+use std::io::Error;
 
 fn get_string() -> String {
     let mut value = String::new();
@@ -14,10 +15,12 @@ fn pause() {
     let _ = get_string();
 }
 
-#[allow(dead_code)]
-fn create_and_write_file(file_path: String, content: String) -> std::io::Result<()> {
-    let mut file = File::create(file_path.to_string())?;
+fn create_file(file_path: String) -> Result<File, Error> {
+    Ok(File::create(file_path.to_string())?)
+}
 
+fn overwrite_file(file_path: String, content: String) -> std::io::Result<()> {
+    let mut file = create_file(file_path)?;
     file.write_all(content.to_string().as_bytes())?;
 
     Ok(())
@@ -51,7 +54,7 @@ fn create_c() {
 
     let full_path = get_full_filepath(path, ".c");
 
-    if let Err(err) = create_and_write_file(
+    if let Err(err) = overwrite_file(
         full_path,
         "#include <stdio.h>\n\nint main()\n{\n\t\n\treturn 0;\n}".to_string(),
     ) {
