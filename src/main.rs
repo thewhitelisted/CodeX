@@ -111,14 +111,6 @@ fn create_java() {
 }
 
 fn main() {
-    /*
-    if let Err(err) = create_and_write_file(file_path, content) {
-        eprintln!("Error: {}", err);
-    } else {
-        println!("File created and written successfully.");
-    }
-    */
-
     loop {
         clearscreen::clear().expect("failed to clear screen");
         println!("Code File Creator\n");
