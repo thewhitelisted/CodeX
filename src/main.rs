@@ -39,10 +39,14 @@ fn get_path() -> String {
     path
 }
 
-fn get_full_filepath(path: String, file_ext: &str) -> String {
+fn get_filename() -> String {
     println!("\nENTER THE FILE NAME WITHOUT FILE EXTENSION: ");
     let file_name = get_string();
-    let full_path = path + "/" + &file_name + file_ext;
+    file_name
+}
+
+fn append_filepath(path: String, file: String, file_ext: &str) -> String {
+    let full_path = path + "/" + &file + file_ext;
     full_path
 }
 
@@ -51,8 +55,8 @@ fn create_c() {
     println!("C FILE CREATOR");
 
     let path = get_path();
-
-    let full_path = get_full_filepath(path, ".c");
+    let file_name = get_filename();
+    let full_path = append_filepath(path, file_name, ".c");
 
     if let Err(err) = overwrite_file(
         full_path,
@@ -67,11 +71,43 @@ fn create_c() {
 }
 
 fn create_python() {
-    todo!()
+    clearscreen::clear().expect("failed to clear screen");
+    println!("PYTHON FILE CREATOR");
+
+    let path = get_path();
+    let file_name = get_filename();
+    let full_path = append_filepath(path, file_name, ".py");
+
+    if let Err(err) = overwrite_file(
+        full_path,
+        "def main(): -> None\n\tpass\n\nif __name__ == '__main__':\n\tmain()".to_string(),
+    ) {
+        eprint!("\nError: {}", err);
+        pause();
+    } else {
+        print!("\nFile created and written successfully.");
+        pause();
+    }
 }
 
 fn create_java() {
-    todo!();
+    clearscreen::clear().expect("failed to clear screen");
+    println!("JAVA FILE CREATOR");
+
+    let path = get_path();
+    let file_name = get_filename();
+    let full_path = append_filepath(path, file_name.clone(), ".java");
+
+    if let Err(err) = overwrite_file(
+        full_path,
+        "public class ".to_owned() + &file_name + " {\n\t\tpublic static void main(String[] args){\n\tSystem.out.println(\"Hello world\");\n\t}\n}",
+    ) {
+        eprint!("\nError: {}", err);
+        pause();
+    } else {
+        print!("\nFile created and written successfully.");
+        pause();
+    }
 }
 
 fn main() {
