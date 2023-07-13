@@ -100,7 +100,10 @@ fn create_java() {
 
     if let Err(err) = overwrite_file(
         full_path,
-        "public class ".to_owned() + &file_name + " {\n\t\tpublic static void main(String[] args){\n\tSystem.out.println(\"Hello world\");\n\t}\n}",
+        format!(
+        "public class {} {{\n\tpublic static void main(String[] args){{\n\tSystem.out.println(\"Hello world\");\n\t}}\n}}",
+        file_name
+    ),
     ) {
         eprint!("\nError: {}", err);
         pause();
